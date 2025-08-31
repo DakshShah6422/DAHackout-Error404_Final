@@ -1,79 +1,54 @@
-Green Hydrogen Subsidy Portal
-A blockchain-powered platform designed to ensure a transparent, secure, and automated distribution of government subsidies for the green hydrogen sector. This project demonstrates a full-stack solution with distinct role-based access for government officials, producers, and auditors.
+**Green Hydrogen Subsidy Portal - Judge's Guide**
+Welcome to the Green Hydrogen Subsidy Portal, a blockchain-powered platform for transparent and automated subsidy disbursement. This guide provides the technical steps required to set up and demonstrate the application's core functionality.
 
-✨ Key Features
-Role-Based Access Control: Separate, secure dashboards for Government, Producer (vendor), and Auditor roles.
+Core Concept
+This project uses a combination of a traditional web server with a database and a decentralized smart contract on the blockchain.
 
-Blockchain Integration: Utilizes a Solidity smart contract to manage vendor registration and subsidy parameters on an immutable ledger, ensuring transparency and trust.
+Web Application (Node.js & MySQL): Manages user accounts (Government, Producer, Auditor), roles, and provides the user interface.
 
-Real-Time Progress Tracking: Government officials and producers can monitor project progress toward subsidy milestones in real-time.
+Blockchain (Solidity & Sepolia Testnet): The smart contract acts as the ultimate source of truth. It securely holds the rules for vendor registration, progress tracking, and fund withdrawal, ensuring all actions are transparent and irreversible.
 
-Complete Audit Trail: An unchangeable, chronological log of all significant actions (like vendor registration and payments) is available to auditors.
+Required First Step: Create a Government Account
+The system is designed with a secure, role-based architecture. To begin using the portal, a Government user must be created first, as only this role has the authority to register vendors and initiate the subsidy lifecycle.
 
-Dynamic User Interface: A modern, responsive UI with light/dark modes and aesthetic background animations for an enhanced user experience.
+Instructions:
 
-Simulation Ready: Includes a "Reset" feature for judges to easily clear all data and re-run demonstrations.
+Navigate to the main page of the application.
 
-🛠️ Technology Stack
-Frontend: HTML5, Tailwind CSS, JavaScript (ES6+)
+Click the "Sign Up" button.
 
-Backend: Node.js, Express.js
+In the sign-up form, enter your details and make sure to select the "Government" role from the dropdown menu.
 
-Database: MySQL
+Complete the sign-up process.
 
-Blockchain: Solidity, Ethers.js
+You can now log in as the Government user to access the main dashboard.
 
-🚀 Getting Started
-Follow these instructions to get the project up and running on your local machine for demonstration and testing purposes.
+Demonstration Workflow
+Once the Government account is created, you can proceed with the full demonstration flow:
 
-Prerequisites
-Node.js and npm: Download Here
+Log in as Government: Access the dashboard.
 
-MySQL: A running MySQL server instance. You can use a local installation or a cloud service.
+Register a Vendor: Use the "Register New Vendor" button to create a producer account, link their wallet address, and set their production goals on the blockchain. Note: Each vendor's wallet address must be unique.
 
-(Optional) Ganache: For running a local Ethereum blockchain. Download Here
+Update Progress: As the Government user, you can update a vendor's production progress. This action is recorded in the database and logged for auditing.
 
-Installation & Setup
-Clone the repository:
+Log in as Producer: Log out and sign in using the producer's credentials. The producer can view their real-time progress toward the milestone.
 
-git clone <your-repository-url>
-cd <repository-folder>
+Withdraw Subsidy: Once the production milestone is met, the status will change to "Payout Ready." The producer can then click "Withdraw Subsidy," which will trigger a real-time MetaMask transaction on the Sepolia testnet to transfer the funds.
 
-Install backend dependencies:
+Audit the Trail: Finally, log in as an Auditor. The audit dashboard provides a complete, time-stamped log of all major events, including vendor registrations and progress updates, showcasing the system's transparency.
 
-npm install
+Technical Setup Overview
+For a complete local setup, the following components are required:
 
-Set up the Database:
+Node.js Environment: To run the backend server.
 
-Ensure your MySQL server is running.
+MySQL Database: To store user and off-chain project data.
 
-Create a new database (e.g., hydrogen_subsidy).
+.env File: A configuration file in the project root is needed to store the database URL and the blockchain connection details (RPC URL, Private Key of the contract owner, and the deployed Contract Address).
 
-The server will automatically create the necessary tables on its first run.
+*Sepolia Testnet: The SubsidyAutomator.sol smart contract is deployed on this public test network.*
 
-Configure Environment Variables:
+*MetaMask: The browser extension is required for producers to interact with the smart contract and withdraw their funds.*
 
-Create a file named .env in the root of the project.
-
-Copy the contents below into it and fill in your specific details.
-
-.env Template:
-
-# --- Database Configuration ---
-# Example: mysql://user:password@host:port/database_name
-DATABASE_URL="mysql://root:your_password@localhost:3306/hydrogen_subsidy"
-
-# --- Blockchain Configuration (Optional) ---
-# RPC URL from Ganache or your preferred testnet (e.g., Sepolia)
-RPC_URL="[http://127.0.0.1:7545](http://127.0.0.1:7545)"
-
-# The private key of the account you used to deploy the contract (from Ganache)
-PRIVATE_KEY="your_ganache_account_private_key"
-
-# The address of the deployed SubsidyAutomator.sol smart contract
-CONTRACT_ADDRESS="your_deployed_contract_address"
-
-Run the Server:
-
-npm start
-"# DAHackout-Error404_Final" 
+***Developed by Team: Error 404***
